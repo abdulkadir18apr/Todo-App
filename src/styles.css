@@ -1,0 +1,252 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-color: #374151;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  color: #f59e0b;
+  width: 100%;
+}
+
+.heading {
+  margin-top: -10px;
+  background-color: #020617;
+  padding: 1rem;
+}
+.filter_items {
+  display: flex;
+  margin-top: -15px;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding: 8px;
+  background-color: #6b7280;
+}
+.filter_btn {
+  color: #f59e0b;
+  font-weight: 600;
+  background-color: #1e293b;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.filter__search {
+  width: 2rem;
+}
+.filter__input {
+  width: 170px;
+  margin-left: -50px;
+  border: none;
+}
+.filter_btn:hover {
+  background-color: yellow;
+}
+.filter_btn:hover .filter__input {
+  background-color: green;
+}
+
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-left: 2rem;
+}
+.todoCard {
+  width: 20rem;
+  border: 2px solid;
+  background-color: #dcfce7;
+  color: #365314;
+  border-radius: 20px;
+  /* margin:1rem auto; */
+}
+.todoCard ul {
+  list-style: none;
+  min-height: 10rem;
+  padding-top: 1rem;
+  margin: 1rem auto;
+}
+.todoCard ul li {
+  padding: 10px;
+  text-align: left;
+}
+
+.todoCard__header {
+  display: flex;
+  background-color: #365314;
+  justify-content: space-between;
+  align-items: center;
+  color: #eab308;
+}
+.todoCard__header button {
+  width: 2rem;
+  background-color: inherit;
+  border: none;
+  color: inherit;
+  font-size: 2rem;
+  font-weight: 00;
+  cursor: pointer;
+}
+.todoCard h1 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-right: 6rem;
+}
+.todo_item .deleteBtn {
+  background-color: red;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  display: none;
+}
+
+.todo_item label {
+  display: flex;
+  justify-content: space-between;
+  background-color: #c7d2fe;
+  margin: -5px 10px;
+  padding: 10px;
+}
+.todo_item .tag {
+  background-color: #fdba74;
+  padding: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  /* font-style: italic; */
+  text-transform: capitalize;
+  border-top-left-radius: 10px;
+}
+
+.todo_item label:hover .deleteBtn {
+  display: inline;
+  transition: 120ms transform ease-in-out;
+}
+
+.todo_item_checkbox {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: inherit;
+  /* Not removed via appearance */
+  margin: 0;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #365314;
+  border-radius: 0.15em;
+  transform: translateY(0.2em);
+  display: grid;
+  place-content: center;
+  z-index: 1;
+}
+.todo_item_checkbox::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  /* Windows High Contrast Mode */
+  background-color: CanvasText;
+}
+.todo_item_checkbox:checked::before {
+  transform: scale(1);
+}
+/* 
+input[type="checkbox"]:focus {
+  outline: max(2px, 0.15em) solid currentColor;
+  outline-offset: max(2px, 0.15em);
+} */
+
+.modal-container {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  background-color: lightgray;
+  opacity: 60%;
+  z-index: 2;
+}
+
+.addform {
+  display: flex;
+  width: 50%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 20%;
+  margin: auto auto;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 2px 2px 2px 2px purple;
+  border-top-left-radius: 20px;
+  padding: 3rem;
+  background-color: white;
+  opacity: 100%;
+}
+
+.crossBtn {
+  position: relative;
+  top: -2rem;
+  left: 10rem;
+  right: 0rem;
+  background-color: white;
+  color: red;
+  font-weight: bolder;
+  border: none;
+  cursor: pointer;
+}
+.addform__input {
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 3px solid purple;
+  margin: 1rem 0rem;
+}
+.addform__input:focus {
+  outline: none;
+  border-bottom: 3px solid purple;
+  font-weight: 800px;
+}
+.addBtn {
+  display: inline-block;
+  width: 50%;
+  padding: 5px;
+  font-weight: 800;
+  background-color: royalblue;
+  color: wheat;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+.mobile {
+  display: none;
+}
+@media screen and (max-width: 700px) {
+  .mobile {
+    display: block;
+    cursor: pointer;
+    margin-top: -10px;
+    margin-bottom: 1rem;
+  }
+  .filter_items {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    display: none;
+  }
+  .active {
+    display: flex;
+  }
+}
