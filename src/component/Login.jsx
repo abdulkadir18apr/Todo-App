@@ -44,7 +44,12 @@ export default function Login() {
     }
   return (
     <div className='login'>
+        <div className="heading">
+        <h2 className='heading'>"Take control of your schedule </h2>
+        <h2 className='heading'>      and maximize your productivity."</h2>
+        </div>
         <div className="login__conatiner ">
+      
             <div className={`login__page page ${isLogin?"active":""}`}>
                 <h1>Login</h1>
                 <form>

@@ -55,3 +55,16 @@ export const  addTodo=async(todo)=>{
     return json;
     
 }
+export const  deleteTodo=async(id)=>{
+    const res=await fetch(`https://todo-backend-lemon.vercel.app/api/todo/deleteTodo/${id}`,{
+
+    method:"DELETE",
+    headers:{
+        "Content-Type": "application/json",
+        "auth-token":localStorage.getItem('auth-token')
+    }
+    })
+    const json=await res.json();
+    return json;
+    
+}

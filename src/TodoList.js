@@ -129,7 +129,7 @@ export const TodoList = () => {
               <button value={date} onClick={HandleTaskClick}>
                 +
               </button>
-              <h1>{date}</h1>
+              <h1>{date?.split('T')[0]}</h1>
             </div>
 
             <ul>

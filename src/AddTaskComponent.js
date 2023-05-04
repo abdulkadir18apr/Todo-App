@@ -19,7 +19,7 @@ export const AddTaskComponent = ({ date, setShowModal }) => {
     const todo={id:Math.floor(Math.random()*1000),...userInput}
     const res=await addTodo(todo);
     if(res.success){
-      addTask({ ...task, ...userInput });
+      addTask({ ...task, ...todo });
     }
     else{
       alert("Something went Wrong at Backend")
