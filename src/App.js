@@ -1,3 +1,4 @@
+import { Loader } from "./component/Loader";
 import Login from "./component/Login";
 import "./styles.css";
 import { TodoList } from "./TodoList";
@@ -8,6 +9,7 @@ export default function App() {
     <div className="App">
       <h1 className="heading">TODO APP</h1>
       <BrowserRouter>
+
       <Routes>
         <Route path="/" element={<Login/>}/>
         <Route path="/todo" element={<TodoList/>}/>

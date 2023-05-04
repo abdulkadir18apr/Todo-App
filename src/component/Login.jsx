@@ -4,9 +4,12 @@ import {Link, useNavigate} from "react-router-dom"
 import "./css/login.css"
 import { TodoReducer } from '../context/TodoReducer'
 import { loginUser, signupUser } from '../api/apicalls';
+import { useTodoContext } from '../context/TodoContext';
+import { Loader } from './Loader';
 
 export default function Login() {
     const navigate=useNavigate();
+    const {loading,setLoading} = useTodoContext();
     const [isLogin,setIsLogin]=useState(true);
     const [credentials,setCredentials]=useState({email:"",password:""});
 
@@ -15,8 +18,10 @@ export default function Login() {
     }
     const loginHandler=async(e)=>{
         e.preventDefault();
+        setLoading(true)
         const res=await loginUser(credentials);
         console.log(res);
+        setLoading(false);
         if(res.success){
             localStorage.setItem('auth-token',res.authToken);
             navigate("./todo")
@@ -44,6 +49,7 @@ export default function Login() {
     }
   return (
     <div className='login'>
+        {loading && <Loader/>}
         <div className="heading">
         <h2 className='heading'>"Take control of your schedule </h2>
         <h2 className='heading'>      and maximize your productivity."</h2>

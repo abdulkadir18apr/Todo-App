@@ -4,6 +4,7 @@ import { useTodoContext } from "./context/TodoContext";
 import { AddTaskComponent } from "./AddTaskComponent";
 import { useNavigate } from "react-router-dom";
 import { fetchTodo } from "./api/apicalls";
+import { Loader } from "./component/Loader";
 
 export const TodoList = () => {
   const {
@@ -13,7 +14,9 @@ export const TodoList = () => {
     searchTask,
     currentTask,
     clearSearch,
-    setTodo
+    setTodo,
+    loading,
+    setLoading
   } = useTodoContext();
   const navigate=useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -74,6 +77,7 @@ export const TodoList = () => {
   }
 
   const getUserTodos=async()=>{
+    setLoading(true);
     const res=await fetchTodo();
     if(res.success){
       setTodo(res.todos)
@@ -84,10 +88,17 @@ export const TodoList = () => {
     }
   }
   useEffect(()=>{
-    getUserTodos();
+    if(localStorage.getItem("auth-token")){
+      getUserTodos();
+    }
+    else{
+      navigate("/")
+    }
+    setLoading(false);
   },[])
   return (
     <div className="todo">
+      {loading && <Loader/>}
       <nav className="filter">
         <div className="mobile">
           <i
@@ -131,7 +142,6 @@ export const TodoList = () => {
               </button>
               <h1>{date?.split('T')[0]}</h1>
             </div>
-
             <ul>
               {displayTodoObj &&
                 displayTodoObj[date].map((todoItem) => (

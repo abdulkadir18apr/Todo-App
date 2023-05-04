@@ -1,9 +1,10 @@
 import { addTodo } from "./api/apicalls";
+import { Loader } from "./component/Loader";
 import { useTodoContext } from "./context/TodoContext";
 import { useState } from "react";
 
 export const AddTaskComponent = ({ date, setShowModal }) => {
-  const { addTask, todolist, AddTask } = useTodoContext();
+  const { addTask, setLoading,loading} = useTodoContext();
 
   const id = Math.floor(Math.random() * 1000);
   const [userInput, setUserInput] = useState({
@@ -16,8 +17,10 @@ export const AddTaskComponent = ({ date, setShowModal }) => {
     setUserInput({ ...userInput, [e.target.name]: e.target.value });
   };
   const HandleAddTask = async() => {
+    setLoading(true);
     const todo={id:Math.floor(Math.random()*1000),...userInput}
     const res=await addTodo(todo);
+    setLoading(false);
     if(res.success){
       addTask({ ...task, ...todo });
     }
@@ -30,6 +33,7 @@ export const AddTaskComponent = ({ date, setShowModal }) => {
   };
   return (
     <div className="addform">
+      {loading && <Loader/>}
       <button className="crossBtn" onClick={() => setShowModal(false)}>
         X
       </button>

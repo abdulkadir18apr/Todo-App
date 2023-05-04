@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { useTodoContext } from "./context/TodoContext";
 import { deleteTodo } from "./api/apicalls";
+import { Loader } from "./component/Loader";
 
 export const TodoItem = ({ todoItem }) => {
   const [isDone, setIsDone] = useState(false);
   const { id, task, tag } = todoItem;
-  const { deleteTask } = useTodoContext();
+  const { deleteTask ,loading,setLoading} = useTodoContext();
   const HandleDelete=async()=>{
+    setLoading(true);
     const res=await deleteTodo(id);
     console.log(res);
+    setLoading(false);
     if(res.success){
       deleteTask(todoItem)
       alert("Task Deleted");
@@ -19,6 +22,7 @@ export const TodoItem = ({ todoItem }) => {
   }
   return (
     <li className="todo_item" key={id}>
+      {loading && <Loader/>}
       <div style={{ textDecoration: isDone ? "line-through" : "" }}>
         <label>
           <input

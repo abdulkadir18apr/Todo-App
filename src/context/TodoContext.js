@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useState } from "react";
 import { TodoDb } from "./TodoDb";
 
 import { TodoReducer } from "./TodoReducer";
@@ -11,12 +11,15 @@ export const TodoProvider = ({ children }) => {
     task: [],
     filtered: []
   });
+  const [loading,setLoading]=useState(false);
 
   return (
     <TodoContext.Provider
       value={{
         todolist: state.task,
         filteredList: state.filtered,
+        loading,
+        setLoading,
         filterByDate: () => dispatch({ type: "Sort" }),
         addTask: (todoItem) => dispatch({ type: "AddTask", payload: todoItem }),
         deleteTask: (todoItem) =>
