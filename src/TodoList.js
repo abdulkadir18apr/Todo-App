@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { TodoItem } from "./TodoItem";
 import { useTodoContext } from "./context/TodoContext";
 import { AddTaskComponent } from "./AddTaskComponent";
+import { useNavigate } from "react-router-dom";
 
 export const TodoList = () => {
   const {
@@ -10,8 +11,10 @@ export const TodoList = () => {
     filteredList,
     searchTask,
     currentTask,
-    clearSearch
+    clearSearch,
+    setTodo
   } = useTodoContext();
+  const navigate=useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [filter, setFilter] = useState(false);
   let [clickedDate, setClickedDate] = useState("");
@@ -64,6 +67,24 @@ export const TodoList = () => {
       setFilter(false);
     }
   };
+  const HandleLogout=()=>{
+    localStorage.clear();
+    navigate("/")
+  }
+
+  const getUserTodos=async()=>{
+    const res=await fetchTodo();
+    if(res.success){
+      setTodo(res.todos)
+    }
+    else{
+      alert("Something went Wrong");
+      navigate("/")
+    }
+  }
+  useEffect(()=>{
+    getUserTodos();
+  },[])
   return (
     <div className="todo">
       <nav className="filter">
@@ -89,6 +110,9 @@ export const TodoList = () => {
             placeholder="  Search"
             onChange={HandleSearch}
           />
+          <button className="filter_btn" onClick={HandleLogout}>
+           Logout
+          </button>
         </div>
       </nav>
       {showModal && (

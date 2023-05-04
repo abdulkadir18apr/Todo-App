@@ -1,6 +1,8 @@
 export const TodoReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
+    case "setTodo":
+      return {task:[...payload],filtered:[]}
     case "AddTask":
       return { task: [...state.task, payload], filtered: [] };
     case "Sort":

@@ -1,0 +1,65 @@
+.login__conatiner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+    flex-wrap: wrap;
+}
+.login__page,.signup__page{
+    border:2px solid beige;
+  
+}
+.page{
+    background-color:#393646;
+    height: 70%;
+}
+.page  h1{
+    margin-top: 2rem;
+}
+.page form{
+    display: flex;
+    flex-direction: column;
+    padding:2rem 4rem;
+}
+.page  form label{
+    
+    display: block;
+}
+.page form input{
+    display: block;
+    text-align: center;
+    border:none;
+    border-bottom: 2px solid #F4EEE0;
+    background-color:inherit;
+    margin:1rem;
+}
+.page form input:focus{
+    font-weight: 800;
+    border: none;
+    background-color: #393646;
+    color: wheat;
+
+}
+
+.page form input[type="submit"]{
+    background-color: #F4EEE0;
+    cursor:pointer
+}
+
+.signup__page h1{
+    margin-top:1rem;
+}
+.signup__page form{
+    /* border:2px solid; */
+    margin-top: -1rem;
+
+}
+.login__page{
+    display: none;
+}
+.signup__page{
+    display: none;
+}
+.active{
+    display: block;
+}

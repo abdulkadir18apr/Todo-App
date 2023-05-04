@@ -2,13 +2,16 @@ import { createContext, useContext, useReducer } from "react";
 import { TodoDb } from "./TodoDb";
 
 import { TodoReducer } from "./TodoReducer";
+import { fetchTodo } from "../api/apicalls";
+import { useNavigate } from "react-router-dom";
 export const TodoContext = createContext();
 
 export const TodoProvider = ({ children }) => {
   const [state, dispatch] = useReducer(TodoReducer, {
-    task: [...TodoDb],
+    task: [],
     filtered: []
   });
+
   return (
     <TodoContext.Provider
       value={{
@@ -21,7 +24,8 @@ export const TodoProvider = ({ children }) => {
         searchTask: (searchValue) =>
           dispatch({ type: "Search", payload: searchValue }),
         currentTask: () => dispatch({ type: "CurrentDateTask" }),
-        clearSearch: () => dispatch({ type: "ClearSearch" })
+        clearSearch: () => dispatch({ type: "ClearSearch" }),
+        setTodo:(todos)=> dispatch({type:"setTodo",payload:todos})
       }}
     >
       {children}

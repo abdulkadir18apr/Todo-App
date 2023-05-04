@@ -1,3 +1,4 @@
+import { addTodo } from "./api/apicalls";
 import { useTodoContext } from "./context/TodoContext";
 import { useState } from "react";
 
@@ -14,12 +15,18 @@ export const AddTaskComponent = ({ date, setShowModal }) => {
   const HandleChange = (e) => {
     setUserInput({ ...userInput, [e.target.name]: e.target.value });
   };
-  const HandleAddTask = () => {
+  const HandleAddTask = async() => {
+    const todo={id:Math.floor(Math.random()*1000),...userInput}
+    const res=await addTodo(todo);
+    if(res.success){
+      addTask({ ...task, ...userInput });
+    }
+    else{
+      alert("Something went Wrong at Backend")
+    }
     console.log(userInput);
-    addTask({ ...task, ...userInput });
-    // AddTask({ ...task, ...userInput });
+   
     setShowModal(false);
-    console.log(todolist);
   };
   return (
     <div className="addform">
